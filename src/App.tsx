@@ -4,10 +4,10 @@ import Products from './components/Products'
 function App() {
 
   return (
-    <>
-    <h1>Hello World!!</h1>
-    <Products />
-    </>
+    <div>
+      <h1>Hello World!!</h1>
+      <Products />
+    </div>
   )
 }
 
