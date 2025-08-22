@@ -1,32 +1,53 @@
-/* App.css */
-
+/* === Reset and base styles === */
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+
+  /* Center everything on the page */
+  display: flex;
+  justify-content: center; /* horizontally center */
+  align-items: flex-start; /* start from top, change to center for vertical centering */
   background: #f5f7fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }
 
+/* Wrapper for the entire App content */
+.app-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center all children */
+  gap: 2rem;
+}
+
+/* Headings */
 h1 {
-  text-align: center;
-  margin-top: 1.5rem;
   font-weight: 700;
   color: #222;
+  text-align: center;
+  margin: 0;
 }
 
 /* Container wrapping search and products */
 .app-container {
+  width: 100%;
   max-width: 1200px;
-  margin: 2rem auto 3rem auto;
   padding: 0 1rem;
+
+  /* Center children */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* Search input */
 .search-input {
   width: 100%;
   max-width: 400px;
-  display: block;
-  margin: 0 auto 2rem auto;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #ddd;
@@ -45,6 +66,9 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
+
+  justify-content: center; /* center grid items */
+  width: 100%;
 }
 
 /* Product card */
@@ -107,4 +131,10 @@ h1 {
   .product-card h2 {
     font-size: 1.1rem;
   }
+}
+
+/* Center the Button from MUI */
+.centered-button {
+  display: block;
+  margin: 0 auto;
 }
