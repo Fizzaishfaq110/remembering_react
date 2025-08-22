@@ -15,7 +15,16 @@ const Products = () => {
   console.log("Products: ", products);
 
   return (
-    <div>Products will be here</div>
+    <div>
+      <h1>Products</h1>
+      <div>
+        {products.map((product) => (
+          <div key={product.id}>
+            <h2>{product.title}</h2>
+            </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
