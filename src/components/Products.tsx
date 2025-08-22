@@ -5,6 +5,7 @@ import { getProducts } from "../services/api";
 const Products = () => {
 
   const[products,setProducts] = useState<Product[]>([]); //to store the data returned from api call
+  const[searchTerm,setSearchTerm]= useState("");
 
   useEffect (()=> {
     getProducts().then((products)=> {
@@ -14,11 +15,17 @@ const Products = () => {
 
   console.log("Products: ", products);
 
+  const filteredProducts = products.filter((product)=>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <div>
       <h1>Products</h1>
+      <input type="search" placeholder="Search for a Product" value={searchTerm} onChange={(e)=> {setSearchTerm(e.target.value)}}></input>
+
       <div>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id}>
             <h2>{product.title}</h2>
             <h3>Description:</h3>
