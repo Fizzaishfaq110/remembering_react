@@ -2,15 +2,14 @@ import { useEffect, useState } from "react"
 import type { Product } from "../types/product"
 import { getProducts } from "../services/api"
 import "../App.css"
+import { Card, TextField, Typography } from "@mui/material"
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]) // store data from API
+  const [products, setProducts] = useState<Product[]>([])
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    getProducts().then((products) => {
-      setProducts(products)
-    })
+    getProducts().then((products) => setProducts(products))
   }, [])
 
   const filteredProducts = products.filter((product) =>
@@ -19,32 +18,50 @@ const Products = () => {
 
   return (
     <>
-      <h1>Products</h1>
+      <Typography variant="h4" gutterBottom style={{ fontWeight: 600 }}>
+        Products
+      </Typography>
+
       <div className="app-container">
-        <input
-          type="search"
-          placeholder="Search for a Product"
+        <TextField
+          variant="outlined"
+          color="secondary"
           value={searchTerm}
+          placeholder="Search for a product"
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
+          fullWidth
+          sx={{
+            backgroundColor: "#fff0f6",
+            borderRadius: "8px",
+            marginBottom: "2rem"
+          }}
         />
 
         <div className="products-container">
           {filteredProducts.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img src={product.image} alt={product.title} />
-              <h2>{product.title}</h2>
-              <h3>Description:</h3>
-              <p>{product.description}</p>
-              <h3>Price:</h3>
-              <p>${product.price}</p>
-              <h3>Category:</h3>
-              <p>{product.category}</p>
-              <h3>Rating:</h3>
-              <p>{product.rating.rate}</p>
-              <h3>Reviews:</h3>
-              <p>{product.rating.count} reviews</p>
-            </div>
+            <Card
+              key={product.id}
+              className="product-card"
+              sx={{
+                padding: "1.5rem",
+                borderRadius: "1rem",
+                boxShadow: "0 6px 12px rgba(0,0,0,0.06)",
+                transition: "0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 12px 20px rgba(0,0,0,0.1)"
+                }
+              }}
+            >
+              <img src={product.image} alt={product.title} style={{ maxHeight: "180px", objectFit: "contain" }} />
+              <Typography variant="h6" mt={2}>{product.title}</Typography>
+              <Typography variant="body2" color="text.secondary" mt={1}>
+                {product.description.slice(0, 100)}...
+              </Typography>
+              <Typography mt={2}><strong>Price:</strong> ${product.price}</Typography>
+              <Typography><strong>Category:</strong> {product.category}</Typography>
+              <Typography><strong>Rating:</strong> ⭐ {product.rating.rate} ({product.rating.count} reviews)</Typography>
+            </Card>
           ))}
         </div>
       </div>
